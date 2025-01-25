@@ -4,15 +4,15 @@ tasks:
     name: PyMySQL
     executable: pip3.9
 
-- name: install mysql
-  ansible.builtin.package:
-    name: mysql-server
-    state: present
-- name: services 
-  ansible.builtin.service:
-    name: mysqld
-    state: started
-    enabled: yes
+# - name: install mysql
+#   ansible.builtin.package:
+#     name: mysql-server
+#     state: present
+# - name: services 
+#   ansible.builtin.service:
+#     name: mysqld
+#     state: started
+#     enabled: yes
   
 # - name: connecting mysql
 #   community.mysql.mysql_info:
