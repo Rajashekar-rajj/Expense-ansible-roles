@@ -64,7 +64,7 @@
 
 - name: 
   ansible.builtin.service:
-    deamon_reload: true
+    daemon_reload: true
     state: restarted
     name: backend
 
