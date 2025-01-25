@@ -1,4 +1,4 @@
-tasks: 
+ 
 - name: installing python packages
   ansible.builtin.pip: 
     name: PyMySQL
