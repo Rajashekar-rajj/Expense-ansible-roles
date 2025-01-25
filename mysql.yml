@@ -1,4 +1,5 @@
 - name: configure mysql
   hosts: mysql
+  become: yes
   tasks:
     roles: 
