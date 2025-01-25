@@ -1,10 +1,8 @@
 
-[Unit]
-Description = Backend Service
 
 [Service]
 User=expense
-Environment=DB_HOST="{{ login_host }}"
+Environment=DB_HOST="mysql.rajashekar-devops.online"
 ExecStart=/bin/node /app/index.js
 SyslogIdentifier=backend
 
