@@ -7,37 +7,48 @@
     name: nginx
     state: started
     enabled: yes
+
+- name: import tasks from common role
+  ansible.builtin.import_role:
+    name: common
+    task_from: app=pre-req
+
+# using common components
   
-- name: remove old existing code
-  ansible.builtin.file:
-    path: /usr/share/nginx/html/
-    state: absent
+# - name: remove old existing code
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: absent
 
-- name: create html file
-  ansible.builtin.file:
-    path: /usr/share/nginx/html/
-    state: directory
+# - name: create html file
+#   ansible.builtin.file:
+#     path:   
+#     state: directory
 
-- name : download the code
-  ansible.builtin.get_url:
-    url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-    dest: /tmp/frontend.zip
+# - name : download the code
+#   ansible.builtin.get_url:
+#     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+#     dest: /tmp/frontend.zip
 
-- name: extract the file
-  ansible.builtin.unarchive:
-    src: /tmp/frontend.zip
-    dest: /usr/share/nginx/html
-    remote_src: yes
+# - name: extract the file
+#   ansible.builtin.unarchive:
+#     src: /tmp/frontend.zip
+#     dest: /usr/share/nginx/html
+#     remote_src: yes
+  notify:
+  - restart nginx
 
-- name: copy expense cong
+- name: copy expense conf
   ansible.builtin.template:
     src: expense.conf.j2
     dest: /etc/nginx/default.d/expense.conf
     remote_src: yes
+    notify:
+    - restart service
     
     
 
-- name: restart service
-  ansible.builtin.service:
-    name: nginx
-    state: restarted
+# - name: restart service
+#   ansible.builtin.service:
+#     name: nginx
+#     state: restarted

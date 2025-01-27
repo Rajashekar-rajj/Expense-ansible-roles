@@ -1,0 +1,4 @@
+mysql_password: ExpenseApp@1
+login_host: frontend.rajashekar-devops.online
+app_location: /usr/share/nginx/html
+component: frontend

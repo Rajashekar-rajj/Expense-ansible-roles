@@ -16,21 +16,28 @@
   ansible.builtin.user:
     name: expense
 
-- name: make a directory
-  ansible.builtin.file:
-    path: /app
-    state: directory
+- name: import tasks from common role
+  ansible.builtin.import_role:
+  name: common
+  task_from: app=pre-req
 
-- name: download application code
-  ansible.builtin.get_url:
-    url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-    dest: /tmp/backend.zip
+# using common components
 
-- name: unzip file
-  ansible.builtin.unarchive:
-    src: /tmp/backend.zip
-    dest: /app
-    remote_src: yes
+# - name: make a directory
+#   ansible.builtin.file:
+#     path: /app
+#     state: directory
+
+# - name: download application code
+#   ansible.builtin.get_url:
+#     url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+#     dest: /tmp/backend.zip
+
+# - name: unzip file
+#   ansible.builtin.unarchive:
+#     src: /tmp/backend.zip
+#     dest: /app
+#     remote_src: yes
 
 - name: install depemdencies
   ansible.builtin.command: npm install
